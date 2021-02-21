@@ -1,3 +1,3 @@
 # parsec
-Lightweight blockchain cryptocureency in Go
+Lightweight blockchain cryptocurrency in Go
 
