@@ -16,7 +16,6 @@ func main() {
 	bchain.AddBlock("Hello World")
 	bchain.AddBlock("Hello Again World!")
 	bchain.AddBlock("Hello Again & Again World")
-	bchain.AddBlock("Hello Again & Again & Again World")
 	bchain.PrintChain()
 
 	app.Get("/api/blockchain", func(c *fiber.Ctx) error {
