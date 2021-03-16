@@ -19,7 +19,6 @@ func main() {
 	bchain.AddBlock("Hello Again & Again & Again World")
 	bchain.PrintChain()
 
-	fmt.Println(bchain.ValidChain())
 	app.Get("/api/blockchain", func(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusOK).JSON(bchain)
 	})
