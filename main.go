@@ -23,24 +23,6 @@ func main() {
 		return c.Status(fiber.StatusOK).JSON(bchain)
 	})
 
-	app.Post("/api/mine", func(c *fiber.Ctx) error {
-		type Request struct {
-			Title string `json:"title"`
-		}
-		var body Request
-
-		err := c.BodyParser(&body)
-
-		if err != nil {
-			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-				"error": "cannot parse json",
-			})
-		}
-
-		bchain.AddBlock(body.Title)
-		return c.Status(fiber.StatusCreated).JSON(bchain)
-	})
-
 	log.Fatal(app.Listen(":3000"))
 
 }
