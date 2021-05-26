@@ -1,16 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"log"
-
-	"github.com/gofiber/fiber"
 	"github.com/quarterblue/parsec/blockchain"
 )
 
 func main() {
 
-	app := fiber.New()
+	// app := fiber.New()
 
 	bchain := blockchain.CreateBlockchain()
 	bchain.AddBlock("Hello World")
@@ -18,10 +14,10 @@ func main() {
 	bchain.AddBlock("Hello Again & Again World")
 	bchain.PrintChain()
 
-	app.Get("/api/blockchain", func(c *fiber.Ctx) error {
-		return c.Status(fiber.StatusOK).JSON(bchain)
-	})
+	// app.Get("/api/blockchain", func(c *fiber.Ctx) error {
+	// 	return c.Status(fiber.StatusOK).JSON(bchain)
+	// })
 
-	log.Fatal(app.Listen(":3000"))
+	// log.Fatal(app.Listen(":3000"))
 
 }
