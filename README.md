@@ -6,6 +6,9 @@
     <a href="https://github.com/quarterblue/parsec/actions/workflows/go.yml" target="_blank">
         <img src="https://github.com/quarterblue/parsec/actions/workflows/go.yml/badge.svg" alt="GitHub Passing">
     </a>
+    <a href="https://github.com/quarterblue/parsec/graphs/commit-activity" target="_blank">
+        <img src="https://img.shields.io/github/last-commit/quarterblue/parsec" alt="Last Commit">
+    </a>
 </p>
 
 ## About
