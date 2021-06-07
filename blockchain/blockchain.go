@@ -4,15 +4,39 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"fmt"
+	"log"
+
+	"github.com/dgraph-io/badger"
 
 	"github.com/quarterblue/parsec/util"
 )
 
+const (
+	dbPath = "./tmp/blocks"
+)
+
 type Blockchain struct {
-	Blocks []*Block
+	Blocks   []*Block
+	Database *badger.DB
 }
 
+// Creates a new blockchain if there is no
 func CreateBlockchain() *Blockchain {
+	var lastHash []byte
+
+	opts := badger.DefaultOptions
+	opts.Dir = dbPath
+	opts.ValueDir = dbPath
+
+	db, err := badger.Open(opts)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	err := db.Update(func(txn *badger.Txn) error {
+        if _, err := txn.Get([]byte("lh")); err = badger.ErrKeyNotFound
+	})
+
 	blockchain := &Blockchain{[]*Block{Genesis()}}
 	return blockchain
 }

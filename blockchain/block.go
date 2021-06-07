@@ -1,7 +1,10 @@
 package blockchain
 
 import (
+	"bytes"
+	"encoding/gob"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/quarterblue/parsec/util"
@@ -18,6 +21,7 @@ type Block struct {
 	Difficulty int    `json:"difficulty"`
 }
 
+// Prints block information for debugging purposes
 func (block *Block) PrintBlock() {
 	unixTime := time.Unix(block.Timestamp, 0)
 	fmt.Println("Timestamp: ", unixTime)
@@ -27,7 +31,6 @@ func (block *Block) PrintBlock() {
 }
 
 func CreateBlock(data string, lastBlock *Block) *Block {
-
 	block := &Block{util.MakeTimeStamp(), []byte(data), []byte{}, lastBlock.Hash, 0, lastBlock.Difficulty}
 	pow := CreatePow(block)
 	nonce, hash := pow.ComputeHash()
@@ -41,6 +44,8 @@ func CreateBlock(data string, lastBlock *Block) *Block {
 	return block
 }
 
+// Generates the first hardcoded Gensis block.
+// The data used for the hash is NYTimes headline title from August 7, 2020.
 func Genesis() *Block {
 	data := "NYTimes Aug 7, 2020 Job Growth Slowed in July, Signaling a Loss of Economic Momentum"
 	block := &Block{1596783600, []byte(data), []byte{}, []byte{}, 0, InitDifficulty}
@@ -51,6 +56,7 @@ func Genesis() *Block {
 	return block
 }
 
+// Utility function to adjust the difficulty of the proof of work algorithm.
 func (block *Block) AdjustDiff(timestamp int64) {
 	difference := timestamp - block.Timestamp
 	if difference > mineRate {
@@ -58,4 +64,28 @@ func (block *Block) AdjustDiff(timestamp int64) {
 		return
 	}
 	block.Difficulty++
+}
+
+// Serializes a block into bytestring for persistance storage
+func (b *Block) Serialize() []byte {
+	var result bytes.Buffer
+	encoder := gob.NewEncoder(&result)
+	err := encoder.Encode(b)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	return result.Bytes()
+}
+
+// Deserializes bytestring into block when loading from persistance storage
+func Deserialize(data []byte) *Block {
+	var block Block
+	decoder := gob.NewDecoder(bytes.NewReader(data))
+	err := decoder.Decode(&block)
+
+	if err != nil {
+		log.Panic(err)
+	}
+	return &block
 }
