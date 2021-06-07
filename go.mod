@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/andybalholm/brotli v1.0.1 // indirect
 	github.com/brianolson/cbor_go v1.0.0 // indirect
+	github.com/dgraph-io/badger v1.6.1 // indirect
 	github.com/go-redis/redis/v8 v8.5.0
 	github.com/gofiber/fiber v1.14.6
 	github.com/gofiber/fiber/v2 v2.5.0 // indirect
