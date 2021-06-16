@@ -11,5 +11,4 @@ func main() {
 	bchain.AddBlock("Hello Again World!")
 	bchain.AddBlock("Hello Again & Again World")
 	bchain.PrintChain()
-
 }
