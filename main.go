@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/quarterblue/parsec/blockchain"
+
+	"github.com/quarterblue/parsec/api"
 )
 
 func main() {
@@ -11,4 +13,5 @@ func main() {
 	bchain.AddBlock("Hello Again World!")
 	bchain.AddBlock("Hello Again & Again World")
 	bchain.PrintChain()
+	api.HandleRequests()
 }

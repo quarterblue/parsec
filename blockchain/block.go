@@ -57,6 +57,7 @@ func Genesis() *Block {
 }
 
 // Utility function to adjust the difficulty of the proof of work algorithm.
+// Difficulty is adjusted based on mineRate set at top line
 func (block *Block) AdjustDiff(timestamp int64) {
 	difference := timestamp - block.Timestamp
 	if difference > mineRate {

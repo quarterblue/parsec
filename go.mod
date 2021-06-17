@@ -11,6 +11,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.5.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/uuid v1.2.0 // indirect
+	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/ipfs/go-ipfs-util v0.0.2 // indirect
 	github.com/klauspost/compress v1.11.7 // indirect
 	github.com/libp2p/go-conn-security v0.1.0 // indirect
