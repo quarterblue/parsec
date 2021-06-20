@@ -19,10 +19,23 @@ Lightweight cryptocurrency blockchain in Go
 
 ## Installation
 
-To run, clone the repo and run
+To run as a **node standalone**, clone the repo and run:
 ```
-go run main.go
+$ go run main.go standalone
 ```
+
+To run as a **simulator**, clone the repo and run:
+```
+$ go run main.go sim
+```
+
+Then navigate to frontend:
+```
+$ cd frontend/
+$ npm start
+```
+
+Open up http://localhost:9200 in your favorite browser.
 
 ## Usage
 
