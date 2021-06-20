@@ -62,6 +62,7 @@ func CreateBlockchain() *Blockchain {
 	err = db.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(blocksBucket))
 
+		// There is no blockchain existing in the database, make new and add Gensis Block
 		if b == nil {
 			genesis := Genesis()
 			b, err := tx.CreateBucket([]byte(blocksBucket))
@@ -78,11 +79,16 @@ func CreateBlockchain() *Blockchain {
 			}
 			head = genesis.Hash
 		} else {
+			// There is a blockchain existing in the database, the the head pointer to the blockchain's last hash
 			head = b.Get([]byte("lh"))
 		}
 
 		return nil
 	})
+
+	if err != nil {
+		log.Panic(err)
+	}
 
 	blockchain := Blockchain{head, db}
 	return &blockchain
@@ -111,10 +117,17 @@ func (chain *Blockchain) AddBlock(data string) {
 			log.Panic(err)
 		}
 		err = b.Put([]byte("l"), newBlock.Hash)
+		if err != nil {
+			log.Panic(err)
+		}
 		chain.head = newBlock.Hash
 
 		return nil
 	})
+
+	if err != nil {
+		log.Panic(err)
+	}
 
 	// lastBlock := chain.Blocks[len(chain.Blocks)-1]
 	// newBlock := CreateBlock(data, lastBlock)
@@ -162,7 +175,7 @@ func (chain *Blockchain) AddBlock(data string) {
 // }
 
 // func (chain *Blockchain) PrintChain() {
-// 	for _, block := range chain.Blocks {
-// 		block.PrintBlock()
-// 	}
+// for _, block := range chain.Blocks {
+// 	block.PrintBlock()
+// }
 // }
