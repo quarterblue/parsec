@@ -30,12 +30,12 @@ func (block *Block) PrintBlock() {
 	fmt.Printf("Last Hash: %x\n", block.LastHash)
 }
 
-func CreateBlock(data string, lastBlock *Block) *Block {
-	block := &Block{util.MakeTimeStamp(), []byte(data), []byte{}, lastBlock.Hash, 0, lastBlock.Difficulty}
+func CreateBlock(data string, lastBlock []byte, difficulty int) *Block {
+	block := &Block{util.MakeTimeStamp(), []byte(data), []byte{}, lastBlock, 0, difficulty}
 	pow := CreatePow(block)
 	nonce, hash := pow.ComputeHash()
 	block.Nonce = nonce
-	block.Hash = hash
+	block.Hash = hash[:]
 
 	// Adjust difficulty
 	// lastTime := lastBlock.Timestamp

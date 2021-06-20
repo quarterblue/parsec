@@ -23,10 +23,16 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: mainpage")
 }
 
+func addBlock(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Add block")
+	fmt.Println("Endpoint Hit: AddBlock")
+}
+
 func HandleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/", mainPage)
 	myRouter.HandleFunc("/blockchain", blockChainPage)
 	myRouter.HandleFunc("/block", blockPage)
+	myRouter.HandleFunc("/addblock", addBlock)
 	log.Fatal(http.ListenAndServe(":9200", myRouter))
 }
