@@ -41,6 +41,7 @@ require (
 	github.com/whyrusleeping/go-smux-multistream v2.0.2+incompatible // indirect
 	github.com/whyrusleeping/go-smux-yamux v2.0.9+incompatible // indirect
 	github.com/whyrusleeping/yamux v1.2.0 // indirect
+	go.etcd.io/bbolt v1.3.6 // indirect
 	golang.org/x/sys v0.0.0-20210217105451-b926d437f341 // indirect
 	rsc.io/quote v1.5.2 // indirect
 )
